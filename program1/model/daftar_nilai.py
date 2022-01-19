@@ -1,60 +1,70 @@
 import os
-from view.input_nilai import *
 import time
+from view.view_nilai import view
+from view.input_nilai import input_data
+from model._data import data
 
-dt={}
-class daftarNilai():
-    def tambah(self):
-        print('\n\033[95mTambah Data Mahasiswa')
-        input_nama  = nama()
-        input_nim   = nim()
-        input_tugas = tugas()
-        input_uts   = uts()
-        input_uas   = uas()
-        input_akhir = akhir()
-        dt[input_nama]=input_nim,input_tugas,input_uts,input_uas,input_akhir
-        print("\n\033[93mData Berhasil Di ditambah!\n")
-        time.sleep(0.5)
-        os.system('CLS')
-    def ubah(self):
-        print('\n\033[95mMengubah Data Mahasiswa')
-        input_nama  = nama()                                                         
-        if input_nama in dt.keys():                              
-            input_nim   = nim()
-            input_tugas = tugas()
-            input_uts   = uts()
-            input_uas   = uas()
-            input_akhir = akhir()
-            dt[input_nama]=input_nim,input_tugas,input_uts,input_uas,input_akhir                      
-            print("\n\033[93mData Berhasil Di Update!\n")
-            time.sleep(0.5)
-            os.system('CLS')
-        else:                                                                                    
-            print("\n\033[93mData tidak ditemukan!\n")
-            time.sleep(0.5)
-            os.system('CLS')
-    def hapus(self):
-        print('\n\033[95mmenghapus data')
-        input_nama = nama()                                                        
-        if input_nama in dt.keys():
+
+p = view()
+
+
+
+class daftar:
+
+    def tambah_data(self):
+        input_data.header_tambah(self)
+        input_data.data_input(self)
+        data.mhs[self.nama] = self.nim, self.tugas, self.uts, self.uas, self.akhir
+        time.sleep(1)
+        input_data.mengetik('\n\nsaving data\nloading please wait .....')
+        print('\n\033[97mData Telah Ditambah')
+        time.sleep(1)
+        os.system('cls')
+        
+    def ubah_data(self):
+        input_data.header_ubah(self)
+        input_data.nama_input(self)
+        input_data.mengetik('\nloading please wait .....')
+        os.system('cls') 
+        if self.nama in data.mhs.keys():
+            input_data.new_data(self)
+            data.mhs[self.nama] = self.nim, self.tugas, self.uts, self.uas, self.akhir
+            input_data.mengetik('\n\nsaving data\nloading please wait .....')
+            print('\n\033[97mData Berhasil Diubah')
+            time.sleep(1)
+            os.system('cls')
+         
+        else:
+            print('\n\033[93mData Tidak Ditemukan !!!')
+            time.sleep(1)
+            os.system('cls')
+
+    def hapus_data(self):
+        input_data.header_hapus(self)
+        input_data.nama_input(self)
+        os.system('cls')
+        input_data.header_hapus(self)
+
+        if self.nama in data.mhs:
             z=input('\n\033[93mapakah kamu yakin ingin menghapus (y/t) : ')                                                              
             if z == "y":
-                del dt[input_nama]                                                                   
-                print("\n\033[93mData Telah dihapus!\n")
-                time.sleep(0.3)
-                os.system('CLS')
-            if z == "t":
-                print('\n\033[93mKembali ke menu utama')
+                del data.mhs[self.nama]
+                input_data.mengetik('\n\ndeleting data\nloading please wait .....')                                                                   
+                print("\n\033[97mData Telah dihapus!\n")
                 time.sleep(0.5)
                 os.system('CLS')
+            if z == "t":
+                print('\n\033[97mKembali ke menu utama')
+                time.sleep(0.5)
+                os.system('CLS')
+            else:
+                print('Masukan Pilihan Yang Benar') 
+                return daftar.hapus_data(self)         
         else:
-            print("\033[93mData Mahasiswa Tidak Ada\n")
+            print('\n\033[93mData Tidak Ditemukan')
             time.sleep(0.5)
-            os.system('CLS')
-    
-    def keluar(self):
-        print('\n\033[97m=====terimakasih=====\n')
-        print(21*'=')
-        print("Nama\t: Nur hidayat\nKelas\t: TI.21.C5\nNIM\t: 312110584")
-        print(21*'=')  
-        print('\n>\033[03m copyright github.com/mashid89 2021\n')
+            os.system('cls')
+    def cari_data(self):
+        input_data.header_cari(self)
+        input_data.nama_input(self)
+        view.cari(self)
