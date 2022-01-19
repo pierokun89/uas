@@ -5,7 +5,7 @@
 
 ## SOAL
 
-![](img/soal.JPG)
+![](img/soal.jpg)
 
 ## PENJELASAN PROGRAM
 > main.py
@@ -40,7 +40,7 @@ berisi terusan pemanggilan **tampikan semua data** dan **mencari data** dari **d
 
 ## tampilan pada editor text
 
-![](img/vscode.PNG)
+![](img/vscode.png)
 
 ## hasil program
 
